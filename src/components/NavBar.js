@@ -23,7 +23,7 @@ function NavBar({username,show}) {
   
   
   return (
-    <div>
+    <div className="nav_bars">
     {show ?(<Navbar bg="primary" style={{"color":"#fff"}} expand="lg">
             <Container>
                 <Navbar.Brand as={Link} style={{"color":"#fff","fontWeight":"700"}} to="/">SEAT</Navbar.Brand>
@@ -31,8 +31,8 @@ function NavBar({username,show}) {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav  className="me-auto nav-color">
                     <NavLink as={Link} className={active==="home"?"active":""} onClick={()=>setActiveElement("home")} style={{"color":"#fff"}} to={'/'}>Movie</NavLink>
-                    <NavLink as={Link} className={active==="about"?"active":""} onClick={()=>setActiveElement("about")} style={{"color":"#fff"}} to={'/about'}>About</NavLink>
-                    <NavLink as={Link} className={active==="contact"?"active":""} onClick={()=>setActiveElement("contact")} style={{"color":"#fff"}} to={'/contact'}>Contact</NavLink>
+                    <NavLink as={Link} className={active==="about"?"active":""} onClick={()=>setActiveElement("about")} style={{"color":"#fff"}} to={'/soon'}>About</NavLink>
+                    <NavLink as={Link} className={active==="contact"?"active":""} onClick={()=>setActiveElement("contact")} style={{"color":"#fff"}} to={'/soon'}>Contact</NavLink>
                 </Nav>
                 <Nav className="ms-auto nav-color">
                     <NavLink as={Link} style={{"color":"#fff"}} to={'/login'}>Logout</NavLink>

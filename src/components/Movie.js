@@ -8,8 +8,6 @@ function Movie() {
         <Container>
             <Row>
                 <MovieCard/>
-                <MovieCard/>
-                <MovieCard/>
             </Row>
         </Container>
     </div>
