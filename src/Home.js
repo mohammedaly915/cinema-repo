@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-
+import Footer from './components/Footer'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Movie from './components/Movie';
 
@@ -31,13 +31,18 @@ function Home() {
     
     return (<>
 
-        <div>
+        <div className='main'>
             {showmenu ?(
+                <>
                 <div className="header">
 
                     <h1 >Welcome {displayusername}</h1>
                     <Movie/>
-                </div>):
+                    
+                </div>
+                <Footer/>
+                </>
+                ):
                 ( <>
                     <Link to='/login'>Sign in</Link>
                     <Link to='/regester'>sign out</Link>
@@ -45,16 +50,7 @@ function Home() {
                 
             }
         </div>
-    );
-
-    {/* {
-        signIN ===true && signup===true?(<Link to="/login" onClick={()=>signOut=true}>sign out</Link>):
-        (<>
-        <Link to="/regestir" onClick={()=>signup=true}>sign up</Link>
-    <Link to="/login" onClick={()=>signup===true?signIN=true:null}>sign in</Link></>
-    )
     
-    }  */}
     
     
     </>

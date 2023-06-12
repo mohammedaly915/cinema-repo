@@ -1,5 +1,6 @@
 .App {
-    text-align: center;
+    
+    
     }
     
     .App-logo {
@@ -225,8 +226,8 @@
     font-weight: 500;
     .active{
         background-color: #2669cd;
-    }
-}
+    }}
+
 .bton{
     display:flex;
     gap: 5px;
@@ -239,9 +240,10 @@
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
+        text-decoration: none;
     
     &:hover {
-        background-color: #941d1b;
+        background-color: #592120;
     }
     
     &.view{
@@ -259,4 +261,90 @@
         justify-content: center;
     }
 
+}
+.log-page{
+
+}
+.log_btn{
+    background-color: #2669cd;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    text-transform: capitalize; 
+}
+.soon{
+    font-size: 40px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    height: 80vh;
+}
+
+
+button{
+        background-color: #fff;
+        color: #97999e;
+        &.tube:hover{
+            background-color: #941d1d;
+        }
+        &.twitt:hover{
+            background-color: #2669cd;
+        }
+        &.face:hover{
+            background-color: #0e3a73;
+        }
+        &.insta:hover{
+            background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+}
+.copy{
+        background-color: rgba(0, 0, 0, 0.2);
+        height: 58px;
+}
+.main{
+    text-align: center;
+    .header{
+        min-height: 67vh;
+        h1{
+            font-weight: 300;
+            
+        }
+        .col{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            .card{
+                height: 400px;
+                img{
+                    height: 60%;
+                }
+                .card-body{
+                    height: 40%;
+                    .card-title{
+                        height: 20;
+                    }
+                    .card.text{
+                        height: 20%;
+                    }
+                    .boto{
+                        height: 60%;
+                    }
+                }
+            }
+        }
+    }
+    .footer-sec{
+        .my-5{
+            margin-bottom: 0 !important;
+        }
+        .footer{
+            background-color: #2669cd;
+            width:100%;
+        }
+    }
 }
