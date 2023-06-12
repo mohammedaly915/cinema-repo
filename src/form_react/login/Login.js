@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import {  Container, Form, Toast } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
-//import { signOut } from '../../Home'
+import {useNavigate } from 'react-router-dom'
 
 function Login() {
-    useEffect(()=>{
-        sessionStorage.clear();
-            },[]);
+    const [checkUser,setCheckUser]=useState(true)
+    const [checkPass,setCheckpass]=useState(true)
     const [id,setId]=useState("")
     const [pass,setPassword]=useState("")
     const navigate= useNavigate();
+
+    useEffect(()=>{
+        sessionStorage.clear();
+        
+        clearInterval();
+
+            },[]);
+        
     const ProceedLogin = (e) => {
         e.preventDefault();
         if (validate()) {
-            fetch("http://localhost:9000/user/" + id).then((res) => {
+            fetch("https://productdp-aksv.vercel.app/user/"+ id).then((res) => {
                 return res.json();
             }).then((resp) => {
                 console.log(resp);
                 if (Object.keys(resp).length === 0) {
                     console.log("NOt found that user name");
+                    setInterval(() => {
+                        setCheckUser(false)
+                    }, 1000);
                 } else {
                     if (resp.pass === pass) {
                         console.log("sucess");
@@ -26,16 +35,69 @@ function Login() {
                         sessionStorage.setItem('userrole',resp.role);
                         navigate('/')
                     }else{
+                        setInterval(() => {
+                            setCheckpass(false)
+                        }, 1000);
                         console.log("pawword is missingS");
+                        
                     }
                 }
-            }).catch((err) => {
-                console.log(err)
-            });
+            })
+        } 
+        clearInterval();
+    }
+    
+
+    const validate = () => {
+        let result = true;
+        if (id === '' || id === null) {
+            result = false;
         }
+        if (pass === '' || pass === null) {
+            result = false;
+            console.log("Warning")
+        }
+        return result;
     }
 
-    // const ProceedLoginusingAPI = (e) => {
+  return (<>
+    {/* <Link to="/" onClick={()=>signOut=true}>sign out</Link> */}
+    <Container className="log-page">
+        <h1 className='py-5' >Login Page</h1>
+        <Form  onSubmit={ProceedLogin}>
+        
+        
+        {
+            checkUser===false?
+            (<Toast className="d-inline-block m-1" bg={`Danger`.toLowerCase()} key={1}>
+            <Toast.Body className="Danger">Not valid user</Toast.Body>
+            </Toast>):null     
+        }
+        {
+            checkPass===false?
+            (<Toast className="d-inline-block m-1" bg={`Danger`.toLowerCase()} key={1}>
+            <Toast.Body className="Danger">Not valid Pass</Toast.Body>
+            </Toast>):null     
+        }
+        <Form.Group className="mb-3" controlId={`formBasicname`}>
+                <Form.Label>User Name</Form.Label>
+                <Form.Control  type='text' onChange={(e)=>setId(e.target.value)} placeholder="Enter Name" />
+            </Form.Group>
+        
+        <Form.Group className="mb-3" controlId={`formBasicpassword`}>
+                <Form.Label>password</Form.Label>
+                <Form.Control type='password'  onChange={(e)=>setPassword(e.target.value)} placeholder="Enter password" />
+                </Form.Group>
+                <input type="submit" className="log_btn" value="login"/> 
+        </Form>
+    </Container>
+  </>
+  )
+}
+
+export default Login
+
+// const ProceedLoginusingAPI = (e) => {
     //     e.preventDefault();
     //     if (validate()) {
     //         ///implentation
@@ -82,55 +144,3 @@ function Login() {
     //     }
     // }
 
-    const validate = () => {
-        let result = true;
-        if (id === '' || id === null) {
-            result = false;
-            <Toast className="d-inline-block m-1" bg={`Warning`.toLowerCase()} key={1} >
-                <Toast.Body className="Warning">Hello, world! This is a toast message.</Toast.Body>
-            </Toast>
-        }
-        if (pass === '' || pass === null) {
-            result = false;
-            console.log("Warning")
-        }
-        return result;
-    }
-
-  return (<>
-    {/* <Link to="/" onClick={()=>signOut=true}>sign out</Link> */}
-    <Container>
-        <h1 className='py-5' >Login Page</h1>
-        <Form  onSubmit={ProceedLogin}>
-        <Form.Group className="mb-3" controlId={`formBasicname`}>
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control required type='text' onChange={(e)=>setId(e.target.value)} placeholder="Enter Name" />
-            </Form.Group>
-        
-        <Form.Group className="mb-3" controlId={`formBasicpassword`}>
-                <Form.Label>password</Form.Label>
-                <Form.Control type='password' required onChange={(e)=>setPassword(e.target.value)} placeholder="Enter password" />
-            </Form.Group>
-            {//email}
-            }
-            <input type="submit" style={{backgroundColor: 'blue',color: 'white',padding: '10px',borderRadius: '5px',border: 'none', cursor: 'pointer'}} value="login"/> 
-            {//submit}
-            }
-            {/* <Link to='/regestir'>
-                <button style={{backgroundColor: 'blue',color: 'white',padding: '10px',borderRadius: '5px',border: 'none', cursor: 'pointer'}}>Sign UP</button>
-            </Link> */}
-            </Form>
-    </Container>
-  </>
-  )
-}
-
-export default Login
-{/*  <Form.Group className="mb-3" controlId={`formBasicemail`}>
-                <Form.Label>email</Form.Label>
-                <Form.Control type='email' required onChange={(e)=>setEmail(e.target.value)} placeholder="Enter email" />
-            </Form.Group> */ }
-
-{/* <Link  type="submit">
-                <button style={{backgroundColor: 'Red',color: 'white',padding: '10px',borderRadius: '5px',border: 'none', cursor: 'pointer'}}>Login</button>
-            </Link> */}
